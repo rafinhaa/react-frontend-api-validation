@@ -1,7 +1,7 @@
 import { useUsers } from "../../hooks/useUsers";
 
 export function UsersTable() { 
-    const {users} = useUsers();
+    const {users, deleteUser} = useUsers();
     return (
         <>
             <table>
@@ -10,15 +10,19 @@ export function UsersTable() {
 						<th>#</th>
 						<th>Usuário</th>
 						<th>E-mail</th>
+						<th>Opções</th>
 					</tr>					
 				</thead>
 				<tbody>
 					{
-						users.map(users => (
-							<tr key={users.id}>
-                                <td>{users.id}</td>
-								<td>{users.username}</td>								
-								<td>{users.email}</td>
+						users.map(user => (
+							<tr key={user.id}>
+                                <td>{user.id}</td>
+								<td>{user.username}</td>								
+								<td>{user.email}</td>
+								<td>
+									<button onClick={ () => deleteUser(user.id)}>X</button>
+								</td>
 							</tr>
 							)
 						)						
