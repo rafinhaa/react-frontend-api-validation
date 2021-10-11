@@ -51,6 +51,12 @@ export function UsersProvider({ children }: UsersProviderProps) {
 				er.map(([key, value]) => {
 					toast.error(`${value}`);
 				});
+			} else if (error.request) {
+				toast.error('Error in load data');
+				console.log(error.request);
+			} else {
+				toast.error('Error in load data');
+				console.log(error.message);				
 			}			
 		});
 	}
@@ -65,13 +71,20 @@ export function UsersProvider({ children }: UsersProviderProps) {
 					toast.success(response.data.messages);
 				}
 			}).catch( (error) => {
-			if (error.response) {
-				const er = Object.entries(error.response.data.messages);
-				er.map(([key, value]) => {
-					toast.error(`${value}`);
-				});
+				if (error.response) {
+					const er = Object.entries(error.response.data.messages);
+					er.map(([key, value]) => {
+						toast.error(`${value}`);
+					});
+				} else if (error.request) {
+					toast.error('Error in load data');
+					console.log(error.request);
+				} else {
+					toast.error('Error in load data');
+					console.log(error.message);				
+				}
 			}			
-		});
+		);
 	}
 
 	useEffect(() => {
@@ -87,6 +100,12 @@ export function UsersProvider({ children }: UsersProviderProps) {
 					er.map(([key, value]) => {
 						toast.error(`${value}`);
 					});
+				} else if (error.request) {
+					toast.error('Error in load data');
+					console.log(error.request);
+				} else {
+					toast.error('Error in load data');
+					console.log(error.message);				
 				}
 			});
 	}, []);
