@@ -36,14 +36,19 @@ export function UsersProvider({ children }: UsersProviderProps) {
 		await api.post('add', bodyFormData).then(
 			(response: AxiosResponse) => {
 				if (response.status === 201) {
-					toast.success(response.data.message);
-					return response.data;
+					toast.success(response.data.messages);
+					const user = {
+						id: response.data.data.id,
+						username: response.data.data.username,
+						email: response.data.data.email
+					}
+					setUsers([...users, user]);
 				}
 			}
 		).catch( (error) => {
 			if (error.response) {
-				const oi = Object.entries(error.response.data.message);
-				oi.map(([key, value]) => {
+				const er = Object.entries(error.response.data.messages);
+				er.map(([key, value]) => {
 					toast.error(`${value}`);
 				});
 			}			
@@ -59,11 +64,10 @@ export function UsersProvider({ children }: UsersProviderProps) {
 					setUsers([...users]);
 					toast.success(response.data.messages);
 				}
-			}
-		).catch( (error) => {
+			}).catch( (error) => {
 			if (error.response) {
-				const oi = Object.entries(error.response.data.message);
-				oi.map(([key, value]) => {
+				const er = Object.entries(error.response.data.messages);
+				er.map(([key, value]) => {
 					toast.error(`${value}`);
 				});
 			}			
@@ -72,7 +76,19 @@ export function UsersProvider({ children }: UsersProviderProps) {
 
 	useEffect(() => {
 		api.get('list')
-			.then(response => setUsers(response.data.data));
+			.then( (response: AxiosResponse) => {
+				if (response.status === 200) {
+					setUsers(response.data.data)
+					toast.success(response.data.messages);
+				}
+			}).catch( (error) => {
+				if (error.response) {
+					const er = Object.entries(error.response.data.messages);
+					er.map(([key, value]) => {
+						toast.error(`${value}`);
+					});
+				}
+			});
 	}, []);
 
 	return (
