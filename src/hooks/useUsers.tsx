@@ -32,18 +32,25 @@ export function UsersProvider({ children }: UsersProviderProps) {
 		bodyFormData.append('email',user.email);
 
 		const response = await api.post('add', bodyFormData);
-		console.log(response);
+		if (response.status === 201){
+			api.get('list')		
+				.then(response => setUsers(response.data.data));
+		}
 	}
 
 	async function deleteUser(id: Number) {		
 		const response = await api.delete(`delete/${id}`)
-		console.log(response);
+		if (response.status === 200){
+			const index = users.findIndex(user => user.id === id);
+			users.splice(index, 1);
+			setUsers([...users]);
+		}
 	}
 
 	useEffect(() => {
 		api.get('list')		
 		.then(response => setUsers(response.data.data));
-	}, []);
+	}, [users]);
 
 	return (
 		<UsersContext.Provider value={{users, createUser, deleteUser}}>
