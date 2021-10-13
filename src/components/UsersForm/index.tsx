@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { useUsers } from "../../hooks/useUsers";
-
+import { Container, Content } from "./styles";
 
 export function UsersForm() { 
 	const { createUser } = useUsers();
@@ -13,12 +13,12 @@ export function UsersForm() {
 	}
 	
     return (
-        <>
-            <form onSubmit={handleSubmit} >
+        <Container>
+			<Content onSubmit={handleSubmit} >
 				<input type="text" onChange={ event => setUsername(event.target.value) } placeholder="Nome"></input>
 				<input type="text" onChange={ event => setEmail(event.target.value) } placeholder="E-mail"></input>
-				<input type="submit" value="Enviar" />
-			</form>          
-        </>
+				<button type="submit" >Enviar</button>         
+			</Content>
+        </Container>
     );
 }

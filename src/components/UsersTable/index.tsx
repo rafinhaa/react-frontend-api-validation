@@ -1,9 +1,10 @@
 import { useUsers } from "../../hooks/useUsers";
+import {Container} from "./styles";
 
 export function UsersTable() { 
     const {users, deleteUser} = useUsers();
     return (
-        <>
+        <Container>
             <table>
 				<thead>
 					<tr>
@@ -29,6 +30,6 @@ export function UsersTable() {
 					}
 				</tbody>
 			</table>          
-        </>
+        </Container>
     );
 }
