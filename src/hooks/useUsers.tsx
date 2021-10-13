@@ -3,16 +3,16 @@ import { api } from "../services/api";
 import { toast } from 'react-toastify';
 import { AxiosResponse } from "axios";
 
-interface Users {
+interface User {
 	id: number,
 	username: string,
 	email: string
 }
 
-type UsersInput = Omit<Users, "id">;
+type UsersInput = Omit<User, "id">;
 
 interface UsersContextData {
-	users: Users[],
+	users: User[],
 	createUser: (user: UsersInput) => void
 	deleteUser: (id: Number) => void
 }
@@ -26,7 +26,7 @@ const UsersContext = createContext<UsersContextData>(
 );
 
 export function UsersProvider({ children }: UsersProviderProps) {
-	const [users, setUsers] = useState<Users[]>([]);
+	const [users, setUsers] = useState<User[]>([]);
 
 	async function createUser(user: UsersInput) {
 		var bodyFormData = new FormData();
@@ -108,6 +108,8 @@ export function UsersProvider({ children }: UsersProviderProps) {
 					console.log(error.message);				
 				}
 			});
+
+		
 	}, []);
 
 	return (
@@ -122,15 +124,3 @@ export function useUsers() {
 
 	return context;
 }
-
-function dispatch(arg0: any) {
-	throw new Error("Function not implemented.");
-}
-function returnErrors(data: any, status: number, REGISTER_FAILED: any): any {
-	throw new Error("Function not implemented.");
-}
-
-function REGISTER_FAILED(data: any, status: number, REGISTER_FAILED: any): any {
-	throw new Error("Function not implemented.");
-}
-
