@@ -13,7 +13,7 @@ type UsersInput = Omit<User, "id">;
 
 interface UsersContextData {
 	users: User[],
-	createUser: (user: UsersInput) => void
+	createUser: (user: UsersInput) => any
 	deleteUser: (id: Number) => void
 }
 
@@ -33,7 +33,7 @@ export function UsersProvider({ children }: UsersProviderProps) {
 		bodyFormData.append('username', user.username);
 		bodyFormData.append('email', user.email);
 
-		await api.post('add', bodyFormData).then(
+		return await api.post('add', bodyFormData).then(
 			(response: AxiosResponse) => {
 				if (response.status === 201) {
 					toast.success(response.data.messages);
@@ -43,6 +43,7 @@ export function UsersProvider({ children }: UsersProviderProps) {
 						email: response.data.data.email
 					}
 					setUsers([...users, user]);
+					return response;
 				}
 			}
 		).catch( (error) => {
@@ -57,7 +58,8 @@ export function UsersProvider({ children }: UsersProviderProps) {
 			} else {
 				toast.error('Error in load data');
 				console.log(error.message);				
-			}			
+			}	
+			return error.response;
 		});
 	}
 
@@ -69,6 +71,7 @@ export function UsersProvider({ children }: UsersProviderProps) {
 					users.splice(index, 1);			
 					setUsers([...users]);
 					toast.success(response.data.messages);
+					return response;
 				}
 			}).catch( (error) => {
 				if (error.response) {
