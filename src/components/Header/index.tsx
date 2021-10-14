@@ -7,7 +7,7 @@ export function Header() {
             
             <Content>
                     <h1>Controle de usuário</h1>
-                    <h3>O objetivo desse projeto é fazer o CRUD de uma API, pode consultar o backend <a href="https://github.com/rafinhaa/ci4-api-validation">aqui</a></h3>
+                    <h3>O objetivo desse projeto é fazer a listagem, inserção e remoção da API, pode consultar o backend <a href="https://github.com/rafinhaa/ci4-api-validation">aqui</a></h3>
             </Content>
         </Container>
     );

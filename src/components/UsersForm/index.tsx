@@ -1,6 +1,5 @@
 import { AxiosResponse } from "axios";
 import { FormEvent, useState } from "react";
-import { toast } from "react-toastify";
 import { useUsers } from "../../hooks/useUsers";
 import { Container, Content } from "./styles";
 
