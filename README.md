@@ -18,7 +18,7 @@
 
 ## 🔖 About
 
-Essa é uma aplicação feita com ReactJS que permite a consumir um [API](https://github.com/rafinhaa/ci4-api-validation) feita com o framework [Codeigniter 4](https://codeigniter.com/). Foi foi desenvolvido para fixar os conhecimentos adquiridos durante a segunda parte do curso de ReacjJS da RocketSeat.
+Essa é uma aplicação feita com ReactJS que permite a consumir um [API](https://github.com/rafinhaa/ci4-api-validation) feita com o framework [Codeigniter 4](https://codeigniter.com/). Foi foi desenvolvido para fixar os conhecimentos adquiridos durante a segunda parte do curso de ReackJS da RocketSeat.
 
 ## 🚀 Technologies
 
